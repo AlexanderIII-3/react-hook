@@ -1,5 +1,5 @@
 import './App.scss';
-
+import Header from './component/Header/Header';
 const App = () => {
   const changeTitle = () => {
     setTimeout(() => {
@@ -10,6 +10,7 @@ const App = () => {
   return (
 
     <div>
+      <Header />
       Hello Alex Nguyen
       <button
         onClick={() => { changeTitle() }}
