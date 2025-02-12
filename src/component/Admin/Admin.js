@@ -1,6 +1,6 @@
 const Admin = () => {
     return (
-        <div> User component</div>
+        <div> admin component</div>
     )
 };
 export default Admin;

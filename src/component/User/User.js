@@ -1,6 +1,9 @@
 const User = () => {
     return (
-        <div> User component</div>
+        <div>
+
+            <input className="form-control"></input>
+        </div>
     )
 };
 export default User;
