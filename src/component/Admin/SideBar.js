@@ -1,0 +1,98 @@
+import 'react-pro-sidebar/dist/css/styles.css';
+import {
+    ProSidebar,
+    Menu,
+    MenuItem,
+    SubMenu,
+    SidebarHeader,
+    SidebarFooter,
+    SidebarContent,
+} from 'react-pro-sidebar';
+import './SideBar.scss';
+import { FaTachometerAlt, FaGem, FaList, FaGithub, FaRegLaughWink, FaHeart } from 'react-icons/fa';
+import sidebarBg from '../../assets/bg2.jpg';
+import { GiAncientRuins } from "react-icons/gi";
+import { GiAngelOutfit } from "react-icons/gi";
+
+const SideBar = (props) => {
+    const { image, collapsed, toggled, handleToggleSidebar } = props;
+    return (
+        <>
+            <ProSidebar
+                image={sidebarBg}
+                collapsed={collapsed}
+                toggled={toggled}
+                breakPoint="md"
+                onToggle={handleToggleSidebar}
+            >
+                <SidebarHeader>
+                    <div
+                        style={{
+                            padding: '24px',
+                            textTransform: 'uppercase',
+                            fontWeight: 'bold',
+                            fontSize: 14,
+                            letterSpacing: '1px',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap',
+                        }}
+                    >
+                        <GiAncientRuins size={'3em'} color={"00bfff"} />
+
+                        <span >
+                            Alex Nguyễn
+
+                        </span>
+                    </div>
+                </SidebarHeader>
+
+                <SidebarContent>
+                    <Menu iconShape="circle">
+                        <MenuItem
+                            icon={<GiAngelOutfit />}
+                            suffix={<span className="badge red">New</span>}
+                        >
+                            dashboard
+                        </MenuItem>
+
+                    </Menu>
+                    <Menu iconShape="circle">
+                        <SubMenu
+                            icon={<FaRegLaughWink />}
+                            title="Features"
+                        >
+                            <MenuItem> Manage User</MenuItem>
+                            <MenuItem> Manage Quiz</MenuItem>
+                            <MenuItem> Manage Question</MenuItem>
+                        </SubMenu>
+
+                    </Menu>
+                </SidebarContent>
+
+                <SidebarFooter style={{ textAlign: 'center' }}>
+                    <div
+                        className="sidebar-btn-wrapper"
+                        style={{
+                            padding: '20px 24px',
+                        }}
+                    >
+                        <a
+                            href="https://github.com/AlexanderIII-3/react-hook"
+                            target="_blank"
+                            className="sidebar-btn"
+                            rel="noopener noreferrer"
+                        >
+                            <FaGithub />
+                            <span style={{ whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
+                                viewSource
+                            </span>
+                        </a>
+                    </div>
+                </SidebarFooter>
+            </ProSidebar>
+        </>
+    )
+}
+
+export default SideBar;
