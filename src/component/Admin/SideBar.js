@@ -13,6 +13,7 @@ import { FaTachometerAlt, FaGem, FaList, FaGithub, FaRegLaughWink, FaHeart } fro
 import sidebarBg from '../../assets/bg2.jpg';
 import { GiAncientRuins } from "react-icons/gi";
 import { GiAngelOutfit } from "react-icons/gi";
+import { Link } from 'react-router-dom';
 
 const SideBar = (props) => {
     const { image, collapsed, toggled, handleToggleSidebar } = props;
@@ -53,7 +54,9 @@ const SideBar = (props) => {
                             icon={<GiAngelOutfit />}
                             suffix={<span className="badge red">New</span>}
                         >
-                            dashboard
+                            <Link to='/admins'> Dashboard</Link>
+
+
                         </MenuItem>
 
                     </Menu>
@@ -62,7 +65,7 @@ const SideBar = (props) => {
                             icon={<FaRegLaughWink />}
                             title="Features"
                         >
-                            <MenuItem> Manage User</MenuItem>
+                            <MenuItem>  <Link to="manage-user">Manage User</Link></MenuItem>
                             <MenuItem> Manage Quiz</MenuItem>
                             <MenuItem> Manage Question</MenuItem>
                         </SubMenu>
