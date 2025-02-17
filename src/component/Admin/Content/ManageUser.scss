@@ -1,7 +1,18 @@
-// .manage-user-container {
+.manage-user-container {
+    padding: 10px;
 
-//     .user-content {}
-// }
+    .user-content {
+        .btn-add-new {
+            margin: 15px 0;
+
+        }
+    }
+
+    .title {
+        font-weight: 600;
+        font-size: 30px;
+    }
+}
 
 .modal-add-user {
     .img-preview {

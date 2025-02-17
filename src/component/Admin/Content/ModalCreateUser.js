@@ -2,12 +2,20 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FcAddImage } from "react-icons/fc";
+import { toast } from 'react-toastify';
+import { postCreateNewUser } from '../../../services/userService'
+const ModalCreateUser = (props) => {
+    const { show, setShow } = props
 
-const ModalCreateUser = () => {
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleClose = () => {
+        setShow(false);
+        setEmail('');
+        setPassword('');
+        setUserName('');
+        setImage('');
+        setRole('');
+        setPreviewImage('');
+    }
 
     //state
 
@@ -15,9 +23,9 @@ const ModalCreateUser = () => {
     const [password, setPassword] = useState('');
     const [userName, setUserName] = useState('');
     const [image, setImage] = useState('');
-    const [role, setRole] = useState('');
+    const [role, setRole] = useState('USER');
     const [previewImage, setPreviewImage] = useState('');
-
+    // function
     const handleUploadImage = (event) => {
         if (event?.target?.files && event?.target?.files[0]) {
             setPreviewImage(URL.createObjectURL(event.target.files[0]));
@@ -25,11 +33,46 @@ const ModalCreateUser = () => {
 
         }
     };
+
+    const validateEmail = (email) => {
+        return String(email)
+            .toLowerCase()
+            .match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            );
+    };
+    const handleSubmitCreateUser = async () => {
+
+        // validate email
+        const isValidEmail = validateEmail(email);
+        if (!isValidEmail) {
+            toast.error('InValid Email!')
+            return;
+        }
+        if (!password) {
+            toast.error('InValid Password!')
+        }
+
+        //submit dât
+
+        let data = await postCreateNewUser(email, password, userName, role, image)
+
+
+
+
+        if (data && data.EC === 0) {
+            toast.success(data.EM)
+            handleClose()
+        }
+        if (data && data.EC !== 0) {
+            toast.error(data.EM)
+        }
+    };
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
+            {/* <Button variant="primary" onClick={handleShow}>
                 Launch demo modal
-            </Button>
+            </Button> */}
 
             <Modal show={show}
                 onHide={handleClose}
@@ -65,7 +108,10 @@ const ModalCreateUser = () => {
                         </div>
                         <div className="col-md-4">
                             <label className="form-label">Role</label>
-                            <select className="form-select" onChange={(event) => setRole(event.target.value)}>
+                            <select
+                                value={role}
+                                className="form-select"
+                                onChange={(event) => setRole(event.target.value)}>
                                 <option selected value='ADMIN' >ADMIN</option>
                                 <option>USER</option>
                             </select>
@@ -97,7 +143,7 @@ const ModalCreateUser = () => {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
+                    <Button variant="primary" onClick={handleSubmitCreateUser}>
                         Save Changes
                     </Button>
                 </Modal.Footer>

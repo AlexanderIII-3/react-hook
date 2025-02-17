@@ -13,7 +13,7 @@ import { FaTachometerAlt, FaGem, FaList, FaGithub, FaRegLaughWink, FaHeart } fro
 import sidebarBg from '../../assets/bg2.jpg';
 import { GiAncientRuins } from "react-icons/gi";
 import { GiAngelOutfit } from "react-icons/gi";
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const SideBar = (props) => {
     const { image, collapsed, toggled, handleToggleSidebar } = props;
@@ -40,11 +40,15 @@ const SideBar = (props) => {
                         }}
                     >
                         <GiAncientRuins size={'3em'} color={"00bfff"} />
+                        <Link to="/" >
+                            <span className='link-home'>
+                                Alex Nguyễn
 
-                        <span >
-                            Alex Nguyễn
+                            </span>
 
-                        </span>
+
+                        </Link>
+
                     </div>
                 </SidebarHeader>
 

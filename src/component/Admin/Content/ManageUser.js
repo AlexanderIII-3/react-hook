@@ -1,7 +1,14 @@
 
 import ModalCreateUser from './ModalCreateUser'
 import './ManageUser.scss';
+import { AiTwotonePlusCircle } from "react-icons/ai";
+import { useState } from 'react';
+
 const ManageUser = (props) => {
+
+    const [show, setShow] = useState(false);
+
+
     return (
         <div className="manage-user-container">
 
@@ -9,13 +16,20 @@ const ManageUser = (props) => {
                 Manage User
             </div>
             <div className="user-content">
-                <div>
-                    <button >Add New User</button>
+                <div className='btn-add-new'>
+                    <button
+                        onClick={() => { setShow(true) }}
+
+                        className='btn btn-primary' >
+                        <AiTwotonePlusCircle size={'1em'} />  Add New User</button>
                 </div>
-                <div className="table-user">
+                <div className="table-user-container">
                     table user
                 </div>
-                <ModalCreateUser />
+                <ModalCreateUser
+                    show={show}
+                    setShow={setShow}
+                />
 
             </div>
         </div>
