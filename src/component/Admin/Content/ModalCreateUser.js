@@ -5,7 +5,7 @@ import { FcAddImage } from "react-icons/fc";
 import { toast } from 'react-toastify';
 import { postCreateNewUser } from '../../../services/userService'
 const ModalCreateUser = (props) => {
-    const { show, setShow } = props
+    const { show, setShow, getAllUser } = props
 
     const handleClose = () => {
         setShow(false);
@@ -63,6 +63,7 @@ const ModalCreateUser = (props) => {
         if (data && data.EC === 0) {
             toast.success(data.EM)
             handleClose()
+            await getAllUser()
         }
         if (data && data.EC !== 0) {
             toast.error(data.EM)
@@ -112,7 +113,7 @@ const ModalCreateUser = (props) => {
                                 value={role}
                                 className="form-select"
                                 onChange={(event) => setRole(event.target.value)}>
-                                <option selected value='ADMIN' >ADMIN</option>
+                                <option value='ADMIN' >ADMIN</option>
                                 <option>USER</option>
                             </select>
                         </div>
