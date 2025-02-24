@@ -1,8 +1,25 @@
+import './TableUserPaginate.scss'
+import React, { useEffect, useState } from 'react';
+import ReactPaginate from 'react-paginate';
 
 
-const TableUser = (props) => {
 
-    const { listUser, handleClickBtnUpdateUser, handleClickBtnDeleteUser, handleClickBtnViewUser } = props
+
+
+const TableUserPaginate = (props) => {
+
+
+    const {
+        listUser, handleClickBtnUpdateUser,
+        handleClickBtnDeleteUser, handleClickBtnViewUser,
+        getUserPaginate, pageCount,
+        setCurrentPage, currentPage } = props
+
+    const handlePageClick = (event) => {
+        let numberPage = +event.selected + 1
+        setCurrentPage(numberPage)
+        getUserPaginate(numberPage)
+    };
     return (
         <div className="table-user-container">
 
@@ -58,7 +75,31 @@ const TableUser = (props) => {
 
                 </tbody>
             </table>
+            <div className='d-flex justify-content-center'>
+                <ReactPaginate
+                    nextLabel="Next >"
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={6}
+                    marginPagesDisplayed={8}
+                    pageCount={pageCount}
+                    previousLabel="< Prev"
+                    pageClassName="page-item"
+                    pageLinkClassName="page-link"
+                    previousClassName="page-item"
+                    previousLinkClassName="page-link"
+                    nextClassName="page-item"
+                    nextLinkClassName="page-link"
+                    breakLabel="..."
+                    breakClassName="page-item"
+                    breakLinkClassName="page-link"
+                    containerClassName="pagination"
+                    activeClassName="active"
+                    renderOnZeroPageCount={null}
+                    forcePage={currentPage - 1}
+                />
+            </div>
+
         </div>
     )
 };
-export default TableUser;
+export default TableUserPaginate;

@@ -5,7 +5,10 @@ import { FcAddImage } from "react-icons/fc";
 import { toast } from 'react-toastify';
 import { postCreateNewUser } from '../../../services/userService'
 const ModalCreateUser = (props) => {
-    const { showModalCreateUser, setShowModalCreateUser, getAllUser } = props
+    const {
+        showModalCreateUser, setShowModalCreateUser,
+        getAllUser, currentPage,
+        setCurrentPage, getUserPaginate } = props
 
     const handleClose = () => {
         setShowModalCreateUser(false);
@@ -63,7 +66,8 @@ const ModalCreateUser = (props) => {
         if (data && data.EC === 0) {
             toast.success(data.EM)
             handleClose()
-            await getAllUser()
+            setCurrentPage(1)
+            await getUserPaginate(1)
         }
         if (data && data.EC !== 0) {
             toast.error(data.EM)
