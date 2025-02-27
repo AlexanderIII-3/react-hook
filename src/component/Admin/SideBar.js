@@ -40,14 +40,14 @@ const SideBar = (props) => {
                         }}
                     >
                         <GiAncientRuins size={'3em'} color={"00bfff"} />
-                        <Link to="/" >
+                        <NavLink to="/" >
                             <span className='link-home'>
                                 Alex Nguyễn
 
                             </span>
 
 
-                        </Link>
+                        </NavLink>
 
                     </div>
                 </SidebarHeader>
