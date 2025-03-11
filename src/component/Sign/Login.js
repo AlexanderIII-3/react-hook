@@ -3,7 +3,10 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { postLogin } from '../../services/userService';
 import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { handleLoginRedux } from '../../redux/action/userAction';
 const Login = () => {
+    const dispatch = useDispatch()
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -14,7 +17,11 @@ const Login = () => {
         handleSubmitCreateUser();
         //submit
         let res = await postLogin(email, password);
+
+
         if (res && res.EC === 0) {
+
+            dispatch(handleLoginRedux(res));
             toast.success(res.EM)
             navigate('/')
         }
