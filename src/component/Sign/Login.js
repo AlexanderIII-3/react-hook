@@ -5,17 +5,20 @@ import { postLogin } from '../../services/userService';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { handleLoginRedux } from '../../redux/action/userAction';
+import { FaSpinner } from "react-icons/fa";
+
 const Login = () => {
     const dispatch = useDispatch()
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
+    const [isLoading, setIsLoading] = useState(false)
     const navigate = useNavigate()
     const handleLogin = async () => {
         //validate
         handleSubmitCreateUser();
         //submit
+        setIsLoading(true)
         let res = await postLogin(email, password);
 
 
@@ -23,10 +26,14 @@ const Login = () => {
 
             dispatch(handleLoginRedux(res));
             toast.success(res.EM)
+            setIsLoading(false);
+
             navigate('/')
         }
         if (res && res.EC !== 0) {
             toast.error(res.EM)
+            setIsLoading(false);
+
         }
 
     };
@@ -86,7 +93,16 @@ const Login = () => {
                 <div>
                     <button
                         onClick={() => { handleLogin() }}
-                        className='btn-submit'>Login </button>
+                        className='btn-submit'
+
+                        disabled={isLoading}
+                    >
+                        {isLoading === true ? <FaSpinner className="loaderIcon" /> : ''}
+                        <span>Login</span>
+
+
+
+                    </button>
 
                 </div>
                 <div className=' go-back   text-center'>

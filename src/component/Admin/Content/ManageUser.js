@@ -23,7 +23,7 @@ const ManageUser = (props) => {
 
     const [currentPage, setCurrentPage] = useState(1);
     const [pageCount, setPageCount] = useState(0);
-    const LIMIT_USER = 1;
+    const LIMIT_USER = 5;
     useEffect(() => {
         // getAllUser()
         getUserPaginate(1)
